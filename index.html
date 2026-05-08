@@ -1874,13 +1874,85 @@
     <script>
         // ======== DATA ========
         const projects = [
-            { id: 1, name: "Tech Wave Podcast", tags: ["HTML5", "CSS3"], stack: "HTML5, CSS3, Flexbox, Grid, Media Queries", desc: "A modern, fully responsive podcast landing page with floating microphone animation, episode cards, and dark-themed UI.", challenges: "Pure CSS responsive layout and floating animations without JS.", improvements: "Add JavaScript audio player and dynamic episode loading.", live: "https://github.com/muhiuddinshanto/tech-wave", github: "https://github.com/muhiuddinshanto/tech-wave", color: "#1e1e3a" },
-            { id: 2, name: "Dragon News", tags: ["Next.js", "React"], stack: "Next.js 13, React, Tailwind CSS", desc: "News web app with category filtering, dynamic routing, and fast responsive UI.", challenges: "Next.js App Router dynamic routes and NewsAPI error handling.", improvements: "User authentication and dark mode.", live: "https://dragon-news-neon.vercel.app/", github: "https://github.com/muhiuddinshanto/Dragon-News", color: "#1e293b" },
-            { id: 3, name: "Keen Keeper", tags: ["Next.js", "Recharts"], stack: "Next.js 14, Recharts, Tailwind, SessionStorage", desc: "Friendship analytics dashboard with interactive pie charts and sessionStorage data persistence.", challenges: "Real-time chart updates and data sync with sessionStorage.", improvements: "Export data as CSV and add more chart types.", live: "https://keen-keeper-blond.vercel.app/", github: "https://github.com/muhiuddinshanto/Keen-Keeper", color: "#3c2a6e" },
-            { id: 4, name: "AI Model Hub", tags: ["React", "Tailwind"], stack: "React 18, Tailwind, DaisyUI", desc: "AI subscription platform with cart management, dynamic price calculator, and duplicate prevention.", challenges: "Implementing cart logic and real-time price calculation with React hooks.", improvements: "Integrate payment gateway and user accounts.", live: "https://ai-model-hub-demo.netlify.app/", github: "https://github.com/muhiuddinshanto/ai-model-hub", color: "#4f46e5" },
-            { id: 5, name: "Payoo Banking", tags: ["Vanilla JS", "Tailwind"], stack: "Vanilla JS, Tailwind, LocalStorage", desc: "Mobile banking simulation with login, add money, cash out, transfer, and transaction history.", challenges: "Managing application state without frameworks and real-time balance updates.", improvements: "Backend API integration for full-stack banking.", live: "https://payoo-simulation.netlify.app/", github: "https://github.com/muhiuddinshanto/payoo", color: "#0f7b5e" },
-            { id: 6, name: "Digi Tools", tags: ["React", "Vite"], stack: "React, Vite, Tailwind, React Icons", desc: "Product landing page for digital tools with modern layout and pricing plans.", challenges: "Creating responsive design with Tailwind and smooth icon integration.", improvements: "Add contact form and backend for inquiries.", live: "https://digi-tools-demo.netlify.app/", github: "https://github.com/muhiuddinshanto/Digi-Tools", color: "#d96c0f" }
-        ];
+    { 
+        id: 1, 
+        name: "Tech Wave Podcast", 
+        image: "assets/tech_wave.png", // ইমেজ পাথ যোগ করা হয়েছে
+        tags: ["HTML5", "CSS3"], 
+        stack: "HTML5, CSS3, Flexbox, Grid, Media Queries", 
+        desc: "A modern, fully responsive podcast landing page with floating microphone animation, episode cards, and dark-themed UI.", 
+        challenges: "Pure CSS responsive layout and floating animations without JS.", 
+        improvements: "Add JavaScript audio player and dynamic episode loading.", 
+        live: "https://muhiuddinshanto.github.io/tech-wave/", 
+        github: "https://github.com/muhiuddinshanto/tech-wave", 
+        color: "#1e1e3a" 
+    },
+    { 
+        id: 2, 
+        name: "Dragon News", 
+        image: "assets/dragon_news.png",
+        tags: ["Next.js", "React"], 
+        stack: "Next.js 13, React, Tailwind CSS", 
+        desc: "News web app with category filtering, dynamic routing, and fast responsive UI.", 
+        challenges: "Next.js App Router dynamic routes and NewsAPI error handling.", 
+        improvements: "User authentication and dark mode.", 
+        live: "https://news-next-alpha.vercel.app/", 
+        github: "https://github.com/muhiuddinshanto/Dragon-News", 
+        color: "#1e293b" 
+    },
+    { 
+        id: 3, 
+        name: "Keen Keeper", 
+        image: "assets/keen_keeper.png",
+        tags: ["Next.js", "Recharts"], 
+        stack: "Next.js 14, Recharts, Tailwind, SessionStorage", 
+        desc: "Friendship analytics dashboard with interactive pie charts and sessionStorage data persistence.", 
+        challenges: "Real-time chart updates and data sync with sessionStorage.", 
+        improvements: "Export data as CSV and add more chart types.", 
+        live: "https://keen-keeper-blond.vercel.app/", 
+        github: "https://github.com/muhiuddinshanto/Keen-Keeper", 
+        color: "#3c2a6e" 
+    },
+    { 
+        id: 4, 
+        name: "AI Model Hub", 
+        image: "assets/ai-model-hub.png",
+        tags: ["React", "Tailwind"], 
+        stack: "React 18, Tailwind, DaisyUI", 
+        desc: "AI subscription platform with cart management, dynamic price calculator, and duplicate prevention.", 
+        challenges: "Implementing cart logic and real-time price calculation with React hooks.", 
+        improvements: "Integrate payment gateway and user accounts.", 
+        live: "https://ai-model-hub-mohiuddin.netlify.app/", 
+        github: "https://github.com/muhiuddinshanto/ai-model-hub", 
+        color: "#4f46e5" 
+    },
+    { 
+        id: 5, 
+        name: "Payoo Banking", 
+        image: "assets/payoo.jpg",
+        tags: ["Vanilla JS", "Tailwind"], 
+        stack: "Vanilla JS, Tailwind, LocalStorage", 
+        desc: "Mobile banking simulation with login, add money, cash out, transfer, and transaction history.", 
+        challenges: "Managing application state without frameworks and real-time balance updates.", 
+        improvements: "Backend API integration for full-stack banking.", 
+        live: "https://muhiuddinshanto.github.io/payoo/home.html", 
+        github: "https://github.com/muhiuddinshanto/payoo", 
+        color: "#0f7b5e" 
+    },
+    { 
+    id: 6, 
+    name: "Tile Gallery", 
+    image: "assets/tile_gellery.png",
+    tags: ["Next.js", "MongoDB", "Tailwind"], 
+    stack: "Next.js 16, MongoDB, Better Auth, SwiperJS, Tailwind, DaisyUI", 
+    desc: "Production-ready full-stack tile showcase platform with 3D coverflow slider, smart search/filtering, secure authentication, and server-side rendering for architects and designers.", 
+    challenges: "Implementing 3D coverflow slider with SwiperJS while maintaining SSR performance, and creating protected routes with Better Auth for premium content management.", 
+    improvements: "AI-based tile visualizer for room preview, admin dashboard for tile management, wishlist system, and dark mode support.", 
+    live: "https://tiles-nextjs-brown.vercel.app/", 
+    github: "https://github.com/muhiuddinshanto/tiles-nextjs", 
+    color: "#3b82f6" 
+},
+];
 
         const skillsData = [
             { category: "Frontend (Current Focus)", icon: "fab fa-react", skills: [{ name: "Next.js / React.js", level: 88 }, { name: "JavaScript (ES6+)", level: 85 }, { name: "Tailwind CSS", level: 90 }, { name: "Learning MERN Stack", level: 50 }] },
@@ -2067,12 +2139,13 @@
 
         // ======== RENDER PROJECTS ========
         const projCont = document.getElementById('projectsContainer');
-        projects.forEach(proj => {
-            const card = document.createElement('div');
-            card.className = 'project-card';
-            card.innerHTML = `
+
+projects.forEach(proj => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `
         <div class="project-img" style="background:${proj.color};">
-            <img src="https://placehold.co/600x300/${proj.color.slice(1)}/b8ff3c?text=${encodeURIComponent(proj.name)}&font=syne" alt="${proj.name}">
+            <img src="${proj.image}" alt="${proj.name}" style="width: 100%; height: 100%; object-fit: cover;">
             <div class="project-img-overlay"></div>
             <div class="tags">${proj.tags.map(t => `<span class="project-tag">${t}</span>`).join('')}</div>
         </div>
@@ -2085,12 +2158,16 @@
                 <button class="project-link view-details" data-id="${proj.id}">🔍 Details</button>
             </div>
         </div>`;
-            projCont.appendChild(card);
-        });
-        document.querySelectorAll('.view-details').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const proj = projects.find(p => p.id === parseInt(btn.dataset.id));
-                document.getElementById('modalBody').innerHTML = `
+    projCont.appendChild(card);
+});
+
+// মডাল এবং ডিটেইলস হ্যান্ডলিং
+document.querySelectorAll('.view-details').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const proj = projects.find(p => p.id === parseInt(btn.dataset.id));
+        document.getElementById('modalBody').innerHTML = `
+            <img src="${proj.image}" alt="${proj.name}" style="width:100%; border-radius:10px; margin-bottom:15px;">
+            
             <h2>${proj.name}</h2>
             <div class="stack-label">Tech Stack</div><div class="stack-val">${proj.stack}</div>
             <div class="desc-label">Description</div><div class="desc-val">${proj.desc}</div>
@@ -2100,9 +2177,9 @@
                 <a href="${proj.live}" target="_blank" class="btn-primary"><i class="fas fa-external-link-alt"></i> Live Demo</a>
                 <a href="${proj.github}" target="_blank" class="btn-ghost"><i class="fab fa-github"></i> View Code</a>
             </div>`;
-                document.getElementById('projectModal').classList.add('open');
-            });
-        });
+        document.getElementById('projectModal').classList.add('open');
+    });
+});
 
         // ======== RENDER WP DEMOS ========
         const wpGrid = document.getElementById('wpGrid');
