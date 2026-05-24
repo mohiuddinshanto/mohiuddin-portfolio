@@ -377,10 +377,17 @@
                         <div class="hero-typewriter"><span id="typewriter-text"></span><span class="typewriter-cursor"></span></div>
                         <p class="hero-subtitle">I build <strong>fast, modern interfaces</strong> with Next.js & React, and craft high-converting WooCommerce stores — from UI components to sales funnels that drive real revenue.</p>
                         <div class="hero-cta">
-                            <a href="#" id="resumeBtn" class="btn-primary"><i class="fas fa-download"></i> Download Resume</a>
-                            <a href="https://github.com/muhiuddinshanto" target="_blank" class="btn-ghost"><i class="fab fa-github"></i> GitHub</a>
-                            <a href="https://www.linkedin.com/in/mohiuddin-shanto/" target="_blank" class="btn-ghost"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                        </div>
+     <a href="assets/Mohiuddin_Shanto_resume.pdf" id="resumeBtn" class="btn-primary"><i class="fas fa-download"></i> Download Resume</a>
+
+                            
+    </a>
+    <a href="https://github.com/muhiuddinshanto" target="_blank" class="btn-ghost">
+        <i class="fab fa-github"></i> GitHub
+    </a>
+    <a href="https://www.linkedin.com/in/mohiuddin-shanto/" target="_blank" class="btn-ghost">
+        <i class="fab fa-linkedin"></i> LinkedIn
+    </a>
+</div>
                         <div class="hero-stats">
                             <div class="stat"><span class="stat-num" data-count="15">0</span><span class="stat-label">Projects Built</span></div>
                             <div class="stat"><span class="stat-num" data-count="14">0</span><span class="stat-label">WP Demos</span></div>
@@ -700,7 +707,7 @@
         copyBtn?.addEventListener('click',()=>{navigator.clipboard.writeText('muhiuddinshanto@gmail.com').then(()=>{copyBtn.innerHTML='<i class="fas fa-check"></i> Copied!';copyBtn.classList.add('copied');setTimeout(()=>{copyBtn.innerHTML='<i class="fas fa-copy"></i> Copy Email';copyBtn.classList.remove('copied');},2000);});});
 
         // Resume
-        document.getElementById('resumeBtn')?.addEventListener('click',e=>{e.preventDefault();alert('Resume will be available soon. Thank you!');});
+        // document.getElementById('resumeBtn')?.addEventListener('click',e=>{e.preventDefault();alert('Resume will be available soon. Thank you!');});
 
         // Hero entry
         window.addEventListener('load',()=>{const hc=document.getElementById('hero-content');hc.style.opacity='0';hc.style.transform='translateY(30px)';hc.style.transition='opacity 0.9s ease,transform 0.9s ease';setTimeout(()=>{hc.style.opacity='1';hc.style.transform='none';},100);});

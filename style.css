@@ -58,6 +58,14 @@
     margin-top: 8px;
 }
 
+
+
+
+
+
+
+
+
 /* এনিমেশনসমূহ */
 @keyframes breathing {
     0%, 100% { opacity: 0.5; transform: scale(1); }
@@ -90,3 +98,5 @@
     .hero-stats { justify-content: center; }
     .floating-info-card { left: 50%; transform: translateX(-50%); }
 }
+
+
