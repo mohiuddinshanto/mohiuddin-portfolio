@@ -176,3 +176,11 @@ This project is licensed under the [MIT License](LICENSE). Feel free to use this
 <div align="center">
   <sub>Designed & Developed with ❤️ by <a href="https://github.com/mohiuddinshanto">Mohiuddin Shanto</a></sub>
 </div>
+
+## SEO deployment setup
+
+The current canonical URL is `https://mohiuddinshanto.epicoptimize.com`.
+When moving to a custom domain, set `NEXT_PUBLIC_SITE_URL` to that domain's
+origin in the hosting provider's environment variables before building. It
+overrides the current URL for canonical metadata, social sharing, the sitemap,
+and Person structured data. Keep the value free of a trailing slash.
