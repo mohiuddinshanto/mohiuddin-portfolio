@@ -15,7 +15,7 @@
   </p>
 
   <p align="center">
-    <a href="https://github.com/muhiuddinshanto" target="_blank"><strong>View GitHub Profile »</strong></a>
+    <a href="https://github.com/mohiuddinshanto" target="_blank"><strong>View GitHub Profile »</strong></a>
     &nbsp;•&nbsp;
     <a href="https://www.linkedin.com/in/mohiuddin-shanto/" target="_blank"><strong>Connect on LinkedIn »</strong></a>
     &nbsp;•&nbsp;
@@ -102,7 +102,7 @@ Follow these steps to run the portfolio locally on your machine:
 
 ### 2. Clone the Repository
 ```bash
-git clone https://github.com/muhiuddinshanto/portfolio-next.git
+git clone https://github.com/mohiuddinshanto/portfolio-next.git
 cd portfolio-next
 ```
 
@@ -162,7 +162,7 @@ All personal information, project lists, and skills are decoupled into a single 
 **MERN Stack & Frontend Developer** based in Dhaka, Bangladesh.  
 Passionate about crafting performant, accessible web applications and full-stack solutions.
 
-- 🌐 **Portfolio / GitHub:** [@muhiuddinshanto](https://github.com/muhiuddinshanto)
+- 🌐 **Portfolio / GitHub:** [@mohiuddinshanto](https://github.com/mohiuddinshanto)
 - 💼 **LinkedIn:** [mohiuddin-shanto](https://www.linkedin.com/in/mohiuddin-shanto/)
 - 📧 **Email:** [contact.mohiuddinshanto@gmail.com](mailto:contact.mohiuddinshanto@gmail.com)
 - 📱 **WhatsApp:** [+880 1620 044069](https://wa.me/8801620044069)
@@ -174,5 +174,5 @@ Passionate about crafting performant, accessible web applications and full-stack
 This project is licensed under the [MIT License](LICENSE). Feel free to use this template to showcase your own work!
 
 <div align="center">
-  <sub>Designed & Developed with ❤️ by <a href="https://github.com/muhiuddinshanto">Mohiuddin Shanto</a></sub>
+  <sub>Designed & Developed with ❤️ by <a href="https://github.com/mohiuddinshanto">Mohiuddin Shanto</a></sub>
 </div>
