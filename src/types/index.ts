@@ -2,6 +2,7 @@ export interface Project {
   id: number;
   name: string;
   image: string;
+  role: string;
   tags: string[];
   stack: string;
   desc: string;

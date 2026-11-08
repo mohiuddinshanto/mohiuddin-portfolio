@@ -1,7 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type PointerEvent } from "react";
+import { A11y, Keyboard, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import {
   educationData,
   experienceData,
@@ -54,7 +59,32 @@ export default function PortfolioPage() {
   const [activeId, setActiveId] = useState("home");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeProject, setActiveProject] = useState<Project | null>(null);
+  const [activeSkillCategory, setActiveSkillCategory] = useState("All");
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
+
+  const visibleSkillCategories =
+    activeSkillCategory === "All"
+      ? skillsData
+      : skillsData.filter((category) => category.category === activeSkillCategory);
+
+  const handleHeroPointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (
+      event.pointerType !== "mouse" ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width) * 100;
+    const y = ((event.clientY - bounds.top) / bounds.height) * 100;
+
+    event.currentTarget.style.setProperty("--hero-pointer-x", `${x}%`);
+    event.currentTarget.style.setProperty("--hero-pointer-y", `${y}%`);
+  };
+
+  const handleHeroPointerLeave = (event: PointerEvent<HTMLDivElement>) => {
+    event.currentTarget.style.removeProperty("--hero-pointer-x");
+    event.currentTarget.style.removeProperty("--hero-pointer-y");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -118,7 +148,13 @@ export default function PortfolioPage() {
       <div id="prog" />
       <header className="nv">
         <a href="#home" className="logo">
-          <i>M</i>Shanto
+          <Image
+            src="/assets/Mohiuddin%20Shanto%20Developer%20Brand%20Logo.png"
+            alt="Mohiuddin Shanto — MERN Stack Developer"
+            width={1536}
+            height={1024}
+            priority
+          />
         </a>
         <ul className={`pillnav${isMenuOpen ? " open" : ""}`} id="nav">
           {navItems.map((item) => (
@@ -149,7 +185,11 @@ export default function PortfolioPage() {
       <main>
         <section id="home">
           <div className="wrap">
-            <div className="stage">
+            <div
+              className="stage"
+              onPointerMove={handleHeroPointerMove}
+              onPointerLeave={handleHeroPointerLeave}
+            >
               <div className="ph" id="ph">
                 <span className="fg">
                   <Image
@@ -162,9 +202,9 @@ export default function PortfolioPage() {
                 </span>
               </div>
               <div className="ht">
-                <div className="av">
-                  <b /> Available for projects
-                </div>
+                <a className="av" href="#contact">
+                  <b aria-hidden="true" /> Available for projects
+                </a>
                 <h1>
                   Hi, I&apos;m <em>Mohiuddin.</em>
                 </h1>
@@ -338,19 +378,57 @@ export default function PortfolioPage() {
                 The <b>MERN</b> core, with modern tooling around it.
               </p>
             </div>
-            <div className="mern">
+            <Swiper
+              className="mern-swiper"
+              modules={[Keyboard, A11y]}
+              slidesPerView={1.35}
+              spaceBetween={12}
+              keyboard={{ enabled: true }}
+              speed={360}
+              breakpoints={{
+                560: { slidesPerView: 2, spaceBetween: 16 },
+                760: { slidesPerView: 2.5, spaceBetween: 18 },
+                1001: { slidesPerView: 4, spaceBetween: 18 },
+              }}
+              a11y={{ prevSlideMessage: "Previous stack item", nextSlideMessage: "Next stack item" }}
+            >
               {stack.map((item) => (
-                <div className="gc mt rv" key={item.letter}>
-                  <b>{item.letter}</b>
-                  <h4>{item.name}</h4>
-                  <span>{item.description}</span>
-                </div>
+                <SwiperSlide key={item.letter}>
+                  <div className="gc mt">
+                    <b>{item.letter}</b>
+                    <h4>{item.name}</h4>
+                    <span>{item.description}</span>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className="skill-filters" role="group" aria-label="Filter skills by category">
+              <button
+                type="button"
+                className={`skill-filter${activeSkillCategory === "All" ? " active" : ""}`}
+                aria-pressed={activeSkillCategory === "All"}
+                onClick={() => setActiveSkillCategory("All")}
+              >
+                <i className="fas fa-layer-group" aria-hidden="true" /> All skills
+              </button>
+              {skillsData.map((category) => (
+                <button
+                  type="button"
+                  className={`skill-filter${activeSkillCategory === category.category ? " active" : ""}`}
+                  aria-pressed={activeSkillCategory === category.category}
+                  key={category.category}
+                  onClick={() => setActiveSkillCategory(category.category)}
+                >
+                  <i className={category.icon} aria-hidden="true" /> {category.category}
+                </button>
               ))}
             </div>
-            <div className="cats">
-              {skillsData.map((category) => (
-                <div className="gc sk rv" key={category.category}>
-                  <h3>{category.category}</h3>
+            <div className={`cats${activeSkillCategory === "All" ? "" : " filtered"}`} aria-live="polite">
+              {visibleSkillCategories.map((category) => (
+                <div className="gc sk skill-category" key={category.category}>
+                  <h3>
+                    <i className={category.icon} aria-hidden="true" /> {category.category}
+                  </h3>
                   <ul className="sl">
                     {category.skills.map((skill) => (
                       <li key={skill}>{skill}</li>
@@ -372,9 +450,26 @@ export default function PortfolioPage() {
                 Full-stack builds with <b>live demos</b> and source code.
               </p>
             </div>
-            <div className="pg">
+            <Swiper
+              className="pg project-swiper"
+              modules={[Navigation, Pagination, Keyboard, A11y]}
+              navigation
+              pagination={{ clickable: true }}
+              keyboard={{ enabled: true }}
+              watchOverflow
+              speed={420}
+              spaceBetween={14}
+              slidesPerView={1.08}
+              breakpoints={{
+                480: { slidesPerView: 1.4, spaceBetween: 16 },
+                760: { slidesPerView: 2, spaceBetween: 20 },
+                1001: { slidesPerView: 3, spaceBetween: 24 },
+              }}
+              a11y={{ prevSlideMessage: "Previous project", nextSlideMessage: "Next project" }}
+            >
               {projectsData.map((project) => (
-                <article className="gc pc rv" key={project.id}>
+                <SwiperSlide key={project.id}>
+                <article className="gc pc">
                   <div className="pi">
                     <em>{getProjectInitials(project.name)}</em>
                     {!imageErrors[project.id] && (
@@ -391,15 +486,25 @@ export default function PortfolioPage() {
                         }
                       />
                     )}
-                    <div className="tg">
-                      {project.tags.slice(0, 3).map((tag) => (
-                        <span key={tag}>{tag}</span>
-                      ))}
-                    </div>
                   </div>
                   <div className="pb">
                     <h3>{project.name}</h3>
                     <p>{project.desc}</p>
+                    <div className="project-meta">
+                      <span className="project-role">
+                        <i className="fas fa-code" aria-hidden="true" />
+                        <span>Role:</span>
+                        <strong>{project.role}</strong>
+                      </span>
+                      <div className="project-stack" aria-label={`Tech stack: ${project.tags.join(", ")}`}>
+                        <span className="project-stack-label">Stack</span>
+                        <div className="project-stack-tags">
+                          {project.tags.map((tag) => (
+                            <span className="project-tag" key={tag}>{tag}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                     <div className="pl">
                       <a
                         className="pr"
@@ -407,23 +512,24 @@ export default function PortfolioPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Live demo
+                        <i className="fas fa-arrow-up-right-from-square" aria-hidden="true" /> Live demo
                       </a>
                       <a
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        View code
+                        <i className="fab fa-github" aria-hidden="true" /> Code
                       </a>
-                      <button onClick={() => setActiveProject(project)}>
-                        Details
+                      <button type="button" onClick={() => setActiveProject(project)}>
+                        <i className="fas fa-circle-info" aria-hidden="true" /> Details
                       </button>
                     </div>
                   </div>
                 </article>
+                </SwiperSlide>
               ))}
-            </div>
+            </Swiper>
           </div>
         </section>
 
