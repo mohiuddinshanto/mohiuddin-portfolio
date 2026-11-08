@@ -181,8 +181,10 @@ export default function Hero() {
             <div className="hero-card glass-card" id="heroCard" ref={heroCardRef}>
               <div style={{ position: "relative", width: 140, height: 140, margin: "0 auto 18px", borderRadius: "50%", overflow: "hidden", border: "3px solid var(--accent)" }}>
                 <Image
-                  src="/assets/Mohiuddin Shanto Github Profile.png"
-                  alt="Mohiuddin Shanto"
+                  src="/assets/hero.png"
+                  alt="Mohiuddin Shanto, portfolio portrait"
+                  width={586}
+                  height={735}
                   fill
                   style={{ objectFit: "cover" }}
                   priority

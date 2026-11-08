@@ -98,7 +98,7 @@ export const skillsData: SkillCategory[] = [
   {
     category: "Frontend",
     icon: "fab fa-react",
-    skills: ["React.js", "Next.js (App Router)", "TypeScript", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS", "Framer Motion", "Swiper.js", "HeroUI"]
+    skills: ["React.js", "Next.js (App Router)", "TypeScript", "Zustand", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS", "Framer Motion", "Swiper.js", "HeroUI"]
   },
   {
     category: "Backend",
