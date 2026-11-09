@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { portfolioMarkup, portfolioScripts } from "@/data/portfolioMarkup";
+import { portfolioMarkup, portfolioMobileFixes, portfolioScripts } from "@/data/portfolioMarkup";
 
 let portfolioScriptsStarted = false;
 
@@ -17,5 +17,5 @@ export default function Home() {
     });
   }, []);
 
-  return <div dangerouslySetInnerHTML={{ __html: portfolioMarkup }} />;
+  return <div dangerouslySetInnerHTML={{ __html: portfolioMarkup + portfolioMobileFixes }} />;
 }
