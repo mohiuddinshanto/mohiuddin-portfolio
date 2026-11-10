@@ -1,81 +1,55 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
 export default function Cursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    const cursor = cursorRef.current;
-    const ring = ringRef.current;
+    const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!fine || reduce) return;
+
+    const cursor = document.getElementById("cursor");
+    const ring = document.getElementById("cursorRing");
     if (!cursor || !ring) return;
+    document.body.classList.add("custom-cursor-enabled");
 
-    let mx = 0;
-    let my = 0;
-    let rx = 0;
-    let ry = 0;
-    let animId: number;
-
-    const onMouseMove = (e: MouseEvent) => {
-      mx = e.clientX;
-      my = e.clientY;
-      cursor.style.left = `${mx - 7}px`;
-      cursor.style.top = `${my - 7}px`;
+    let x = -100;
+    let y = -100;
+    let ringX = x;
+    let ringY = y;
+    let frame = 0;
+    const move = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") return;
+      x = event.clientX;
+      y = event.clientY;
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0)`;
     };
-
-    const animateRing = () => {
-      rx += (mx - rx - 21) * 0.12;
-      ry += (my - ry - 21) * 0.12;
-      ring.style.left = `${rx}px`;
-      ring.style.top = `${ry}px`;
-      animId = requestAnimationFrame(animateRing);
+    const animate = () => {
+      ringX += (x - ringX) * 0.14;
+      ringY += (y - ringY) * 0.14;
+      ring.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
+      frame = requestAnimationFrame(animate);
     };
-
-    const onMouseDown = () => cursor.classList.add("clicked");
-    const onMouseUp = () => cursor.classList.remove("clicked");
-
-    const onMouseEnterTarget = () => ring.classList.add("hovered");
-    const onMouseLeaveTarget = () => ring.classList.remove("hovered");
-
-    const attachHoverListeners = () => {
-      const interactables = document.querySelectorAll(
-        "a, button, .glass-card, .project-card, .wp-card, .edu-item, .chip, .skill-chip"
-      );
-      interactables.forEach((el) => {
-        el.addEventListener("mouseenter", onMouseEnterTarget);
-        el.addEventListener("mouseleave", onMouseLeaveTarget);
-      });
-      return interactables;
+    const over = (event: PointerEvent) => {
+      const target = event.target as HTMLElement | null;
+      ring.classList.toggle("hovered", !!target?.closest("a, button, .gc, .tile, .skill-filter"));
     };
-
-    window.addEventListener("mousemove", onMouseMove, { passive: true });
-    window.addEventListener("mousedown", onMouseDown);
-    window.addEventListener("mouseup", onMouseUp);
-    animId = requestAnimationFrame(animateRing);
-
-    const elements = attachHoverListeners();
-    const interval = setInterval(() => {
-      attachHoverListeners();
-    }, 2000);
-
+    const down = () => cursor.classList.add("clicked");
+    const up = () => cursor.classList.remove("clicked");
+    window.addEventListener("pointermove", move, { passive: true });
+    document.addEventListener("pointerover", over, { passive: true });
+    window.addEventListener("pointerdown", down);
+    window.addEventListener("pointerup", up);
+    frame = requestAnimationFrame(animate);
     return () => {
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mousedown", onMouseDown);
-      window.removeEventListener("mouseup", onMouseUp);
-      cancelAnimationFrame(animId);
-      clearInterval(interval);
-      elements.forEach((el) => {
-        el.removeEventListener("mouseenter", onMouseEnterTarget);
-        el.removeEventListener("mouseleave", onMouseLeaveTarget);
-      });
+      document.body.classList.remove("custom-cursor-enabled");
+      window.removeEventListener("pointermove", move);
+      document.removeEventListener("pointerover", over);
+      window.removeEventListener("pointerdown", down);
+      window.removeEventListener("pointerup", up);
+      cancelAnimationFrame(frame);
     };
   }, []);
 
-  return (
-    <>
-      <div className="cursor" ref={cursorRef} id="cursor" />
-      <div className="cursor-ring" ref={ringRef} id="cursorRing" />
-    </>
-  );
+  return <><div className="cursor-dot" id="cursor" aria-hidden="true" /><div className="cursor-ring" id="cursorRing" aria-hidden="true" /></>;
 }

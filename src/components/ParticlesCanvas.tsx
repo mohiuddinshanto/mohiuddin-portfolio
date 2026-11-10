@@ -19,6 +19,8 @@ export default function ParticlesCanvas() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const compact = window.matchMedia("(max-width: 760px), (pointer: coarse)").matches;
 
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
@@ -32,7 +34,10 @@ export default function ParticlesCanvas() {
     window.addEventListener("resize", onResize);
 
     const particles: Particle[] = [];
-    for (let i = 0; i < 80; i++) {
+    const particleCount = compact
+      ? Math.min(14, Math.floor((width * height) / 60000))
+      : Math.min(70, Math.floor((width * height) / 24000));
+    for (let i = 0; i < particleCount; i++) {
       particles.push({
         x: Math.random() * width,
         y: Math.random() * height,
@@ -44,12 +49,19 @@ export default function ParticlesCanvas() {
     }
 
     let animId: number;
+    let lastFrame = 0;
 
-    const draw = () => {
+    const draw = (time: number) => {
+      if (document.hidden) return;
+      if (compact && time - lastFrame < 50) {
+        animId = requestAnimationFrame(draw);
+        return;
+      }
+      lastFrame = time;
       ctx.clearRect(0, 0, width, height);
       const isDark =
         document.documentElement.getAttribute("data-theme") !== "light";
-      const col = isDark ? "184,255,60" : "78,140,10";
+      const col = isDark ? "255,120,40" : "160,65,15";
 
       particles.forEach((p) => {
         ctx.beginPath();
@@ -57,8 +69,10 @@ export default function ParticlesCanvas() {
         ctx.fillStyle = `rgba(${col},${p.o})`;
         ctx.fill();
 
-        p.x += p.vx;
-        p.y += p.vy;
+        if (!reduce) {
+          p.x += p.vx;
+          p.y += p.vy;
+        }
 
         if (p.x < 0) p.x = width;
         if (p.x > width) p.x = 0;
@@ -66,7 +80,7 @@ export default function ParticlesCanvas() {
         if (p.y > height) p.y = 0;
       });
 
-      for (let i = 0; i < particles.length; i++) {
+      for (let i = 0; !compact && i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
@@ -82,12 +96,18 @@ export default function ParticlesCanvas() {
         }
       }
 
-      animId = requestAnimationFrame(draw);
+      if (!reduce) animId = requestAnimationFrame(draw);
     };
 
-    draw();
+    const onVisibilityChange = () => {
+      if (!reduce && !document.hidden) animId = requestAnimationFrame(draw);
+    };
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    if (!reduce && !document.hidden) animId = requestAnimationFrame(draw);
+    else draw(0);
 
     return () => {
+      document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("resize", onResize);
       cancelAnimationFrame(animId);
     };

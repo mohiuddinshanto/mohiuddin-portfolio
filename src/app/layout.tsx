@@ -3,9 +3,9 @@ import SmoothScroll from "@/components/SmoothScroll";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   "https://mohiuddinshanto.epicoptimize.com";
-const siteTitle = "Mohiuddin Shanto | Full-Stack & MERN Stack Developer";
+const siteTitle = "Mohiuddin Shanto | MERN Stack Developer";
 const siteDescription =
-  "Mohiuddin Shanto is a full-stack and MERN stack developer in Dhaka, Bangladesh. Explore his Next.js, React, Node.js, Express, MongoDB, and WordPress projects.";
+  "Mohiuddin Shanto — MERN Stack Developer from Dhaka. Full-stack apps with React, Next.js, Node.js, Express and MongoDB.";
 
 export const metadata: Metadata = {
   metadataBase: siteUrl ? new URL(siteUrl) : undefined,
@@ -68,6 +68,7 @@ export const viewport: Viewport = {
   themeColor: "#050403",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

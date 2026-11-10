@@ -15,6 +15,9 @@ import {
   skillsData,
 } from "@/data/portfolioData";
 import type { Project } from "@/types";
+import Cursor from "@/components/Cursor";
+import Effects3D from "@/components/Effects3D";
+import ParticlesCanvas from "@/components/ParticlesCanvas";
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -79,11 +82,15 @@ export default function PortfolioPage() {
 
     event.currentTarget.style.setProperty("--hero-pointer-x", `${x}%`);
     event.currentTarget.style.setProperty("--hero-pointer-y", `${y}%`);
+    event.currentTarget.style.setProperty("--hero-parallax-x", `${(x - 50) * -0.08}px`);
+    event.currentTarget.style.setProperty("--hero-parallax-y", `${(y - 50) * -0.05}px`);
   };
 
   const handleHeroPointerLeave = (event: PointerEvent<HTMLDivElement>) => {
     event.currentTarget.style.removeProperty("--hero-pointer-x");
     event.currentTarget.style.removeProperty("--hero-pointer-y");
+    event.currentTarget.style.removeProperty("--hero-parallax-x");
+    event.currentTarget.style.removeProperty("--hero-parallax-y");
   };
 
   useEffect(() => {
@@ -99,7 +106,17 @@ export default function PortfolioPage() {
         if (window.scrollY >= element.offsetTop - 180) current = element.id;
       });
       setActiveId(current);
+      const nav = document.querySelector(".nv");
+      const topButton = document.getElementById("back-to-top");
+      if (nav) {
+        nav.classList.toggle("hide", window.scrollY > 240 && window.scrollY > lastScrollY + 4);
+        if (window.scrollY < 120 || window.scrollY < lastScrollY - 4) nav.classList.remove("hide");
+      }
+      topButton?.classList.toggle("show", window.scrollY > 640);
+      lastScrollY = window.scrollY;
     };
+
+    let lastScrollY = window.scrollY;
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
@@ -107,6 +124,15 @@ export default function PortfolioPage() {
   }, []);
 
   useEffect(() => {
+    const revealElements = document.querySelectorAll<HTMLElement>(".rv");
+    if (window.matchMedia("(max-width: 760px), (pointer: coarse)").matches) {
+      revealElements.forEach((element) => {
+        element.classList.add("in");
+        element.style.transitionDelay = "0ms";
+      });
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -118,12 +144,42 @@ export default function PortfolioPage() {
       { threshold: 0.12 },
     );
 
-    document.querySelectorAll(".rv").forEach((element, index) => {
-      (element as HTMLElement).style.transitionDelay = `${(index % 3) * 70}ms`;
+    revealElements.forEach((element, index) => {
+      element.style.transitionDelay = `${(index % 3) * 70}ms`;
       observer.observe(element);
     });
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const target = document.getElementById("tw");
+    if (!target) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const roles = ["MERN Developer", "Next.js Builder", "Full-stack Developer", "React Developer"];
+    if (reduce) return;
+    let roleIndex = 0;
+    let letterIndex = roles[0].length;
+    let deleting = false;
+    let timer = 0;
+    const tick = () => {
+      const role = roles[roleIndex];
+      target.textContent = role.slice(0, letterIndex);
+      if (!deleting && letterIndex === role.length) {
+        deleting = true;
+        timer = window.setTimeout(tick, 1500);
+        return;
+      }
+      if (deleting && letterIndex === 0) {
+        deleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+      } else {
+        letterIndex += deleting ? -1 : 1;
+      }
+      timer = window.setTimeout(tick, deleting ? 34 : 72);
+    };
+    timer = window.setTimeout(tick, 1500);
+    return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
@@ -145,6 +201,9 @@ export default function PortfolioPage() {
 
   return (
     <>
+      <ParticlesCanvas />
+      <Cursor />
+      <Effects3D />
       <div id="prog" />
       <header className="nv">
         <a href="#home" className="logo">
@@ -209,7 +268,7 @@ export default function PortfolioPage() {
                   Hi, I&apos;m <em>Mohiuddin.</em>
                 </h1>
                 <div className="roles">
-                  MERN Developer <i /> Next.js <i /> Builder
+                  <span id="tw" aria-label="MERN Developer, Next.js Builder, Full-stack Developer, React Developer">MERN Developer</span><i /> Next.js <i /> Builder
                 </div>
                 <p className="hp">
                   I craft fast, secure and user-friendly web applications — from
@@ -650,6 +709,15 @@ export default function PortfolioPage() {
       <footer>
         <div className="wrap">© 2026 Mohiuddin Shanto · Built in Dhaka</div>
       </footer>
+
+      <button
+        id="back-to-top"
+        type="button"
+        aria-label="Back to top"
+        onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })}
+      >
+        <i className="fas fa-arrow-up" aria-hidden="true" />
+      </button>
 
       <div
         className={`md${activeProject ? " open" : ""}`}

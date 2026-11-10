@@ -9,11 +9,10 @@ export default function Effects3D() {
     if (!finePointer || reduce) return;
 
     const TILT: [string, number][] = [
-      [".mern-tile", 9],
-      [".project-card", 7],
-      [".wp-card", 6],
-      [".edu-item", 6],
-      [".glass-card:not(.hero-card):not(.skills-sheet)", 4],
+      [".mt", 9],
+      [".pc", 7],
+      [".ei", 6],
+      [".gc:not(.mt):not(.pc):not(.ei)", 4],
     ];
 
     const selector = TILT.map((t) => t[0]).join(",");
