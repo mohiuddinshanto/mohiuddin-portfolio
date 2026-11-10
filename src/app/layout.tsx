@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import SmoothScroll from "@/components/SmoothScroll";
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   "https://mohiuddinshanto.epicoptimize.com";
@@ -88,7 +89,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <SmoothScroll />
+        {children}
+      </body>
     </html>
   );
 }
