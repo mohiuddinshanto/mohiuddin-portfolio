@@ -11,7 +11,7 @@ export const projectsData: Project[] = [
     desc: "Full-stack book borrowing and delivery platform with role-based access for Admin, Librarian, and User, Stripe payments (secure checkout sessions with webhook-based async order processing), and advanced analytics dashboards. Includes a paginated catalog with search/filter, buyer-restricted reviews, and a wishlist.",
     challenges: "Debugging MongoDB aggregation pipelines, corrupt documents causing React render errors, and Vercel serverless deployment patterns.",
     live: "https://bibliodrop.vercel.app/",
-    github: "https://github.com/muhiuddinshanto/BiblioDrop_Client"
+    github: "https://github.com/mohiuddinshanto/BiblioDrop_Client"
   },
   {
     id: 7,
@@ -46,7 +46,7 @@ export const projectsData: Project[] = [
     challenges: "Next.js App Router dynamic routes and NewsAPI error handling.",
     improvements: "User authentication and dark mode.",
     live: "https://news-next-alpha.vercel.app/",
-    github: "https://github.com/muhiuddinshanto/Dragon-News"
+    github: "https://github.com/mohiuddinshanto/Dragon-News"
   },
   {
     id: 4,
@@ -59,7 +59,7 @@ export const projectsData: Project[] = [
     challenges: "Implementing secure JWT + Google OAuth, real-time search & filtering by name/specialty, and managing full CRUD for appointments with instant UI sync.",
     improvements: "Video consultation integration, payment gateway (SSLCommerz/Stripe), dedicated doctor dashboard, email/SMS reminders, real-time chat.",
     live: "https://doc-appoint-omega.vercel.app",
-    github: "https://github.com/muhiuddinshanto/DocAppoint"
+    github: "https://github.com/mohiuddinshanto/DocAppoint"
   },
   {
     id: 3,
@@ -72,7 +72,7 @@ export const projectsData: Project[] = [
     challenges: "Integrating Better Auth with MongoDB and handling JWT verification between Next.js frontend and Express backend with secure server/client component boundaries.",
     improvements: "Add real video file upload support, notifications system, and video recommendations algorithm.",
     live: "https://youtube-clon-client.vercel.app",
-    github: "https://github.com/muhiuddinshanto/youtube_clon_client"
+    github: "https://github.com/mohiuddinshanto/youtube_clon_client"
   },
   {
     id: 2,
@@ -85,7 +85,7 @@ export const projectsData: Project[] = [
     challenges: "Managing application state without frameworks and real-time balance updates.",
     improvements: "Backend API integration for full-stack banking.",
     live: "https://muhiuddinshanto.github.io/payoo/home.html",
-    github: "https://github.com/muhiuddinshanto/payoo"
+    github: "https://github.com/mohiuddinshanto/payoo"
   },
   {
     id: 1,
@@ -98,7 +98,7 @@ export const projectsData: Project[] = [
     challenges: "Implementing 3D coverflow slider with SwiperJS while maintaining SSR performance.",
     improvements: "AI-based tile visualizer for room preview, admin dashboard, wishlist system.",
     live: "https://tiles-nextjs-brown.vercel.app/",
-    github: "https://github.com/muhiuddinshanto/tiles-nextjs"
+    github: "https://github.com/mohiuddinshanto/tiles-nextjs"
   }
 ];
 

@@ -149,11 +149,11 @@ All personal information, project lists, and skills are decoupled into a single 
 
 | Project | Tech Stack | Live Demo | Repository |
 | :--- | :--- | :---: | :---: |
-| **BiblioDrop** | Next.js, React 19, MongoDB, Express, Stripe, Better Auth | [Live Link](https://bibliodrop.vercel.app/) | [GitHub](https://github.com/muhiuddinshanto/BiblioDrop_Client) |
+| **BiblioDrop** | Next.js, React 19, MongoDB, Express, Stripe, Better Auth | [Live Link](https://bibliodrop.vercel.app/) | [GitHub](https://github.com/mohiuddinshanto/BiblioDrop_Client) |
 | **YesFashion** | Next.js 15, TypeScript, MySQL, Prisma, Express 5 | [Live Link](https://woocommerce.epicoptimize.com/) | [GitHub](https://github.com/mohiuddinshanto/epic_store) |
 | **Epic Optimize** | Next.js 15, Three.js, TypeScript, Tailwind, Zod | [Live Link](https://epicoptimize.com) | [GitHub](https://github.com/mohiuddinshanto/Epic-Optimize) |
-| **DocAppoint** | Next.js 16, React 19, Express, MongoDB, Better Auth | [Live Link](https://doc-appoint-omega.vercel.app) | [GitHub](https://github.com/muhiuddinshanto/DocAppoint) |
-| **YouTube Clone** | Next.js 16, TypeScript, MongoDB, Better Auth, HeroUI | [Live Link](https://youtube-clon-client.vercel.app) | [GitHub](https://github.com/muhiuddinshanto/youtube_clon_client) |
+| **DocAppoint** | Next.js 16, React 19, Express, MongoDB, Better Auth | [Live Link](https://doc-appoint-omega.vercel.app) | [GitHub](https://github.com/mohiuddinshanto/DocAppoint) |
+| **YouTube Clone** | Next.js 16, TypeScript, MongoDB, Better Auth, HeroUI | [Live Link](https://youtube-clon-client.vercel.app) | [GitHub](https://github.com/mohiuddinshanto/youtube_clon_client) |
 
 ---
 
